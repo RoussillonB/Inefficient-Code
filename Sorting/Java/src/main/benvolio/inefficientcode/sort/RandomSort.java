@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.apache.commons.lang3.Validate;
 
-import benvolio.inefficientcode.sort.helper.ArrayInstCounter;
+import benvolio.inefficientcode.sort.helper.ExtendedArrayInstCounter;
 
 /**
  * Implements a true random sort. This algorithm swaps two elements randomly
@@ -16,15 +16,13 @@ import benvolio.inefficientcode.sort.helper.ArrayInstCounter;
 public class RandomSort extends InefficientSort {
 
 	@Override
-	protected void doSort(final ArrayInstCounter array) {
+	protected void doSort(final ExtendedArrayInstCounter array) {
 		Validate.notNull(array);
 		final Random rand = new Random();
 		while (!array.isSorted()) {
 			final int i = rand.nextInt(array.length());
 			final int j = rand.nextInt(array.length());
-			final int value = array.get(i);
-			array.set(j, array.get(i));
-			array.set(i, value);
+			array.swap(i, j);
 		}
 	}
 

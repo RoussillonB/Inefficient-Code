@@ -2,8 +2,9 @@ package benvolio.inefficientcode.sort;
 
 import org.apache.commons.lang3.Validate;
 
-import benvolio.inefficientcode.sort.helper.ArrayInstCounter;
+import benvolio.inefficientcode.sort.helper.ExtendedArrayInstCounter;
 import benvolio.inefficientcode.sort.helper.InstructionCounter;
+import benvolio.inefficientcode.sort.helper.UnspecifiedBehaviorException;
 
 /**
  * Inefficient sorting class
@@ -23,7 +24,7 @@ public abstract class InefficientSort {
 	 */
 	public InstructionCounter sort(final int[] array) {
 		Validate.notNull(array);
-		final ArrayInstCounter arrayCounter = new ArrayInstCounter(array);
+		final ExtendedArrayInstCounter arrayCounter = new ExtendedArrayInstCounter(array);
 		this.doSort(arrayCounter);
 		return arrayCounter.getInstructionCounter();
 	}
@@ -36,5 +37,5 @@ public abstract class InefficientSort {
 	 * @param array
 	 *            the array to sort
 	 */
-	protected abstract void doSort(ArrayInstCounter array);
+	protected abstract void doSort(ExtendedArrayInstCounter array);
 }

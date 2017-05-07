@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.apache.commons.lang3.Validate;
 
-import benvolio.inefficientcode.sort.helper.ArrayInstCounter;
+import benvolio.inefficientcode.sort.helper.ExtendedArrayInstCounter;
 
 /**
  * Really inefficient sorting method. Keeps shuffling random subsets of the
@@ -18,7 +18,7 @@ import benvolio.inefficientcode.sort.helper.ArrayInstCounter;
 public class ShuffleSubsetSort extends InefficientSort {
 
 	@Override
-	protected void doSort(final ArrayInstCounter array) {
+	protected void doSort(final ExtendedArrayInstCounter array) {
 		Validate.notNull(array);
 		final Random rand = new Random();
 		while (!array.isSorted()) {

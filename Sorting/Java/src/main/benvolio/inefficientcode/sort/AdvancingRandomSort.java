@@ -4,7 +4,7 @@ import java.util.Random;
 
 import org.apache.commons.lang3.Validate;
 
-import benvolio.inefficientcode.sort.helper.ArrayInstCounter;
+import benvolio.inefficientcode.sort.helper.ExtendedArrayInstCounter;
 
 /**
  * Implements a 'random' sort. For each element, it checks if the element is the
@@ -18,15 +18,13 @@ import benvolio.inefficientcode.sort.helper.ArrayInstCounter;
 public class AdvancingRandomSort extends InefficientSort {
 
 	@Override
-	protected void doSort(final ArrayInstCounter array) {
+	protected void doSort(final ExtendedArrayInstCounter array) {
 		Validate.notNull(array);
 		final Random rand = new Random();
 		for (int i = 0; i < array.length(); i++) {
 			while (!array.isMin(array.get(i), i, array.length())) {
 				final int randIndex = i + rand.nextInt(array.length() - i);
-				final int randValue = array.get(randIndex);
-				array.set(randIndex, array.get(i));
-				array.set(i, randValue);
+				array.swap(i, randIndex);
 			}
 		}
 	}
