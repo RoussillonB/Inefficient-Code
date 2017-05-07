@@ -24,6 +24,9 @@ public abstract class InefficientSort {
 	 */
 	public InstructionCounter sort(final int[] array) {
 		Validate.notNull(array);
+		if (array.length==0) {
+			throw new UnspecifiedBehaviorException("Cannot sort an empty array");
+		}
 		final ExtendedArrayInstCounter arrayCounter = new ExtendedArrayInstCounter(array);
 		this.doSort(arrayCounter);
 		return arrayCounter.getInstructionCounter();
