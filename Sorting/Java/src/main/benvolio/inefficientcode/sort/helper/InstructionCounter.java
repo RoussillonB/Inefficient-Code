@@ -12,12 +12,17 @@ public class InstructionCounter {
 	/**
 	 * The number of 'set' instructions
 	 */
-	private int writeInstCount = 0;
+	private int writeInstCount;
 
 	/**
 	 * The number of 'get' instructions
 	 */
-	private int readInstCount = 0;
+	private int readInstCount;
+	
+	public InstructionCounter() {
+		this.writeInstCount = 0;
+		this.readInstCount = 0;
+	}
 
 	/**
 	 * Increases the current number of 'set' instructions
