@@ -22,4 +22,28 @@ public class ShuffleSort extends InefficientSort {
 		}
 	}
 
+	@Override
+	public String getWorstCasePerformance() {
+		return "Unknown";
+	}
+
+	@Override
+	public String getBestCasePerformance() {
+		return "Unknown";
+	}
+
+	@Override
+	public String getAveragePerformance() {
+		return "Unknown";
+	}
+
+	@Override
+	public String getWorstCaseSpaceComplexity() {
+		return "O(n)";
+	}
+	
+	@Override
+	public long getAveragePerformance(int size) {
+		return -1;
+	}
 }
