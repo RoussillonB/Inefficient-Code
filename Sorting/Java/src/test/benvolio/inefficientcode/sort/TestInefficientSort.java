@@ -1,5 +1,8 @@
 package benvolio.inefficientcode.sort;
 
+import java.util.Arrays;
+
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.Validate;
 
 import benvolio.inefficientcode.sort.helper.ArrayHelper;
@@ -14,10 +17,14 @@ public class TestInefficientSort {
 	public static void main(final String[] args) {
 		final int[] array = ArrayHelper.createRandomArray(TestInefficientSort.ARRAY_SIZE,
 				TestInefficientSort.MAX_VALUE);
-		TestInefficientSort.testAndPrintResults(new RandomSort(), array);
+		TestInefficientSort.testAndPrintResults(new QuickSort(), array);
+		TestInefficientSort.testAndPrintResults(new InsertionSort(), array);
+		TestInefficientSort.testAndPrintResults(new PermutationSort(), array);
 		TestInefficientSort.testAndPrintResults(new AdvancingRandomSort(), array);
-		TestInefficientSort.testAndPrintResults(new ShuffleSort(), array);
+		TestInefficientSort.testAndPrintResults(new AdvancingShuffleSort(), array);
+		TestInefficientSort.testAndPrintResults(new RandomSort(), array);
 		TestInefficientSort.testAndPrintResults(new ShuffleSubsetSort(), array);
+		TestInefficientSort.testAndPrintResults(new ShuffleSort(), array);
 	}
 
 	private static void testAndPrintResults(final InefficientSort sortAlgorithm, final int[] array) {
@@ -26,7 +33,9 @@ public class TestInefficientSort {
 		final String algorithmName = sortAlgorithm.getClass().getSimpleName();
 		try {
 			final InstructionCounter counter = TestInefficientSort.testSort(sortAlgorithm, array);
-			System.out.println("[" + algorithmName + "] Instruction count");
+			System.out.println("[" + algorithmName + "] " + 
+					sortAlgorithm.getAveragePerformance() + " : O(" + 
+					sortAlgorithm.getAveragePerformance(array.length) + ")");
 			System.out.println("\t\tRead: " + counter.getReadInstCount());
 			System.out.println("\t\tWrite: " + counter.getWriteInstCount());
 			System.out.println("\t\tTotal: " + counter.getTotalInstCount());
@@ -40,10 +49,13 @@ public class TestInefficientSort {
 		Validate.notNull(sortAlgorithm);
 		Validate.notNull(array);
 		final int[] testArray = array.clone();
+		final int[] cloneArray = array.clone();
+		Arrays.sort(cloneArray);
+		Arrays.sort(testArray);
 		final InstructionCounter counter = sortAlgorithm.sort(testArray);
-		if (!ArrayHelper.isSorted(testArray)) {
+		if (!ArrayHelper.isSorted(testArray) || !Arrays.equals(cloneArray, testArray)) {
 			throw new SortingError(
-					"The algorithm " + sortAlgorithm.getClass().getName() + " did not sort correctly the array.");
+					"The algorithm [" + sortAlgorithm.getClass().getSimpleName() + "] did not sort correctly the array.");
 		}
 		return counter;
 	}
